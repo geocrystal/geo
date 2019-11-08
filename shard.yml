@@ -1,6 +1,10 @@
 name: geo_coord
 version: 0.1.0
 
+dependencies:
+  haversine:
+    github: mamantoha/haversine
+
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
 
