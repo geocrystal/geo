@@ -35,6 +35,21 @@ c.strfcoord(%{%latd %latm' %lats" %lath, %lngd %lngm' %lngs" %lngh})
 # => "50°0'16\"N 36°13'53\"E"
 ```
 
+### Calculate distances between two coords
+
+Haversine formula from [haversine](https://github.com/mamantoha/haversine) shard is used.
+
+```crystal
+require "geo_coord"
+require "geo_coord/distance"
+
+london = Geo::Coord.new(51.500153, -0.126236)
+new_york = Geo::Coord.new(40.714268, -74.005974)
+
+new_york.distance(london).to_kilometers
+# => 5570.4744596620685
+```
+
 ## Contributing
 
 1. Fork it (<https://github.com/mamantoha/geo_coord/fork>)
