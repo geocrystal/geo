@@ -1,5 +1,9 @@
 # Geo::Coord
 
+[![Build Status](https://travis-ci.org/mamantoha/geo_coord.svg?branch=master)](https://travis-ci.org/mamantoha/geo_coord)
+[![GitHub release](https://img.shields.io/github/release/mamantoha/geo_coord.svg)](https://github.com/mamantoha/geo_coord/releases)
+[![License](https://img.shields.io/github/license/mamantoha/geo_coord.svg)](https://github.com/mamantoha/geo_coord/blob/master/LICENSE)
+
 Geo Coordinates class for Crystal, inspired by the Ruby's [geo_coord](https://github.com/zverok/geo_coord) gem.
 
 ## Installation
