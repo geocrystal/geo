@@ -1,6 +1,6 @@
 module Geo
   class Coord
-    VERSION = "0.1.0"
+    VERSION = "0.2.0"
 
     getter :lat
     getter :lng
