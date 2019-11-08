@@ -1,0 +1,9 @@
+name: geo_coord
+version: 0.1.0
+
+authors:
+  - Anton Maminov <anton.maminov@gmail.com>
+
+crystal: 0.31.1
+
+license: MIT
