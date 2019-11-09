@@ -40,6 +40,26 @@ describe Geo::Coord do
       neg.strfcoord("%lng").should eq("%f" % neg.lng)
     end
 
+    it "understands flags and options" do
+      pos = Geo::Coord.new(50.004444, 36.231389)
+      neg = Geo::Coord.new(-50.004444, -36.231389)
+
+      pos.strfcoord("%+latds").should eq("+50")
+      neg.strfcoord("%+latds").should eq("-50")
+
+      pos.strfcoord("%0.2lats").should eq("%0.2f" % pos.lats)
+      pos.strfcoord("%0.4lat").should eq("%0.4f" % pos.lat)
+      pos.strfcoord("%+0.4lat").should eq("%+0.4f" % pos.lat)
+      pos.strfcoord("%+lat").should eq("%+f" % pos.lat)
+
+      pos.strfcoord("%+lngds").should eq("+36")
+      neg.strfcoord("%+lngds").should eq("-36")
+
+      pos.strfcoord("%0.2lngs").should eq("%0.2f" % pos.lngs)
+      pos.strfcoord("%0.4lng").should eq("%0.4f" % pos.lng)
+      pos.strfcoord("%+0.4lng").should eq("%+0.4f" % pos.lng)
+    end
+
     it "just leaves unknown parts" do
       pos = Geo::Coord.new(50.004444, 36.231389)
       pos.strfcoord("%latd %foo").should eq("50 %foo")
