@@ -37,7 +37,7 @@ c.strfcoord(%{%latd %latm' %lats" %lath, %lngd %lngm' %lngs" %lngh})
 
 ### Formatting
 
-Formats coordinates according to directives in `formatstr`.
+Formats coordinates according to directives.
 
 Each directive starts with `%` and can contain some modifiers before its name.
 
