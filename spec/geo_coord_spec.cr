@@ -2,94 +2,97 @@ require "./spec_helper"
 
 describe Geo::Coord do
   context "initialize" do
-    it "is initialized by (lat, lng)" do
+    context "is initialized by (lat, lng)" do
       c = Geo::Coord.new(50.004444, 36.231389)
 
-      c.lat.should eq(50.004444)
-      c.lng.should eq(36.231389)
+      it { c.lat.should eq(50.004444) }
+      it { c.lng.should eq(36.231389) }
     end
   end
 
   context "strfcoord" do
-    it "renders components" do
+    context "renders components" do
       pos = Geo::Coord.new(50.004444, 36.231389)
       neg = Geo::Coord.new(-50.004444, -36.231389)
 
-      pos.strfcoord("%latd").should eq("50")
-      neg.strfcoord("%latd").should eq("50")
-      neg.strfcoord("%latds").should eq("-50")
+      it { pos.strfcoord("%latd").should eq("50") }
+      it { neg.strfcoord("%latd").should eq("50") }
+      it { neg.strfcoord("%latds").should eq("-50") }
 
-      pos.strfcoord("%latm").should eq("0")
-      pos.strfcoord("%lats").should eq("16")
-      pos.strfcoord("%lath").should eq("N")
-      neg.strfcoord("%lath").should eq("S")
+      it { pos.strfcoord("%latm").should eq("0") }
+      it { pos.strfcoord("%lats").should eq("16") }
+      it { pos.strfcoord("%lath").should eq("N") }
+      it { neg.strfcoord("%lath").should eq("S") }
 
-      pos.strfcoord("%lat").should eq("%f" % pos.lat)
-      neg.strfcoord("%lat").should eq("%f" % neg.lat)
+      it { pos.strfcoord("%lat").should eq("%f" % pos.lat) }
+      it { neg.strfcoord("%lat").should eq("%f" % neg.lat) }
 
-      pos.strfcoord("%lngd").should eq("36")
-      neg.strfcoord("%lngd").should eq("36")
-      neg.strfcoord("%lngds").should eq("-36")
+      it { pos.strfcoord("%lngd").should eq("36") }
+      it { neg.strfcoord("%lngd").should eq("36") }
+      it { neg.strfcoord("%lngds").should eq("-36") }
 
-      pos.strfcoord("%lngm").should eq("13")
-      pos.strfcoord("%lngs").should eq("53")
-      pos.strfcoord("%lngh").should eq("E")
-      neg.strfcoord("%lngh").should eq("W")
+      it { pos.strfcoord("%lngm").should eq("13") }
+      it { pos.strfcoord("%lngs").should eq("53") }
+      it { pos.strfcoord("%lngh").should eq("E") }
+      it { neg.strfcoord("%lngh").should eq("W") }
 
-      pos.strfcoord("%lng").should eq("%f" % pos.lng)
-      neg.strfcoord("%lng").should eq("%f" % neg.lng)
+      it { pos.strfcoord("%lng").should eq("%f" % pos.lng) }
+      it { neg.strfcoord("%lng").should eq("%f" % neg.lng) }
     end
 
-    it "understands flags and options" do
+    context "understands flags and options" do
       pos = Geo::Coord.new(50.004444, 36.231389)
       neg = Geo::Coord.new(-50.004444, -36.231389)
 
-      pos.strfcoord("%+latds").should eq("+50")
-      neg.strfcoord("%+latds").should eq("-50")
+      it { pos.strfcoord("%+latds").should eq("+50") }
+      it { neg.strfcoord("%+latds").should eq("-50") }
 
-      pos.strfcoord("%0.2lats").should eq("%0.2f" % pos.lats)
-      pos.strfcoord("%0.4lat").should eq("%0.4f" % pos.lat)
-      pos.strfcoord("%+0.4lat").should eq("%+0.4f" % pos.lat)
-      pos.strfcoord("%+lat").should eq("%+f" % pos.lat)
+      it { pos.strfcoord("%0.2lats").should eq("%0.2f" % pos.lats) }
+      it { pos.strfcoord("%0.4lat").should eq("%0.4f" % pos.lat) }
+      it { pos.strfcoord("%+0.4lat").should eq("%+0.4f" % pos.lat) }
+      it { pos.strfcoord("%+lat").should eq("%+f" % pos.lat) }
 
-      pos.strfcoord("%+lngds").should eq("+36")
-      neg.strfcoord("%+lngds").should eq("-36")
+      it { pos.strfcoord("%+lngds").should eq("+36") }
+      it { neg.strfcoord("%+lngds").should eq("-36") }
 
-      pos.strfcoord("%0.2lngs").should eq("%0.2f" % pos.lngs)
-      pos.strfcoord("%0.4lng").should eq("%0.4f" % pos.lng)
-      pos.strfcoord("%+0.4lng").should eq("%+0.4f" % pos.lng)
+      it { pos.strfcoord("%0.2lngs").should eq("%0.2f" % pos.lngs) }
+      it { pos.strfcoord("%0.4lng").should eq("%0.4f" % pos.lng) }
+      it { pos.strfcoord("%+0.4lng").should eq("%+0.4f" % pos.lng) }
     end
 
-    it "just leaves unknown parts" do
+    context "just leaves unknown parts" do
       pos = Geo::Coord.new(50.004444, 36.231389)
-      pos.strfcoord("%latd %foo").should eq("50 %foo")
+      it { pos.strfcoord("%latd %foo").should eq("50 %foo") }
     end
 
-    it "understands everyting at once" do
+    context "understands everyting at once" do
       pos = Geo::Coord.new(50.004444, 36.231389)
 
-      pos.strfcoord(%{%latd %latm' %0.1lats" %lath, %lngd %lngm' %0.1lngs" %lngh})
-        .should eq(%{50 0' 16.0" N, 36 13' 53.0" E})
+      it do
+        pos.strfcoord(%{%latd %latm' %lats" %lath, %lngd %lngm' %lngs" %lngh})
+          .should eq(%{50 0' 16" N, 36 13' 53" E})
+      end
     end
 
-    it "can carry" do
+    context "can carry" do
       pos = Geo::Coord.new(0.033333, 91.333333)
 
-      pos.strfcoord("%latd %latm %lats, %lngd %lngm %lngs").should eq("0 2 0, 91 20 0")
-      pos.strfcoord("%latd %latm %0.2lats, %lngd %lngm %0.2lngs").should eq("0 2 0.00, 91 20 0.00")
-      pos.strfcoord("%latd %latm %0.3lats, %lngd %lngm %0.3lngs").should eq("0 1 59.999, 91 19 59.999")
+      it { pos.strfcoord("%latd %latm %lats, %lngd %lngm %lngs").should eq("0 2 0, 91 20 0") }
+      it { pos.strfcoord("%latd %latm %0.2lats, %lngd %lngm %0.2lngs").should eq("0 2 0.00, 91 20 0.00") }
+      it { pos.strfcoord("%latd %latm %0.3lats, %lngd %lngm %0.3lngs").should eq("0 1 59.999, 91 19 59.999") }
     end
   end
 
   context "to_s" do
-    it "is convertible to string" do
-      c = Geo::Coord.new(50.004444, 36.231389)
-      c.to_s.should eq(%{50°0'16"N 36°13'53"E})
-      c.to_s(dms: false).should eq("50.004444,36.231389")
+    context "is convertible to string" do
+      pos = Geo::Coord.new(50.004444, 36.231389)
+      neg = Geo::Coord.new(-50.004444, -36.231389)
 
-      c = Geo::Coord.new(-50.004444, -36.231389)
-      c.to_s.should eq(%{50°0'16"S 36°13'53"W})
-      c.to_s(dms: false).should eq("-50.004444,-36.231389")
+      it { pos.to_s.should eq(%{50°0'16"N 36°13'53"E}) }
+      it { pos.to_s(dms: false).should eq("50.004444,36.231389") }
+
+      it { neg.to_s.should eq(%{50°0'16"S 36°13'53"W}) }
+      it { neg.to_s(dms: false).should eq("-50.004444,-36.231389") }
     end
   end
 end
