@@ -77,6 +77,47 @@ module Geo
       lng.to_i
     end
 
+    # Formats coordinates according to directives in `formatstr`.
+    #
+    # Each directive starts with `%` and can contain some modifiers before its name.
+    #
+    # Acceptable modifiers:
+    # - unsigned integers: none;
+    # - signed integers: `+` for mandatory sign printing;
+    # - floats: same as integers and number of digits modifier, like `0.3`.
+    #
+    # List of directives:
+    #
+    # - `%lat`   - Full latitude, floating point, signed
+    # - `%latds` - Latitude degrees, integer, signed
+    # - `%latd`  - Latitude degrees, integer, unsigned
+    # - `%latm`  - Latitude minutes, integer, unsigned
+    # - `%lats`  - Latitude seconds, floating point, unsigned
+    # - `%lath`  - Latitude hemisphere, "N" or "S"
+    # - `%lng`   - Full longitude, floating point, signed
+    # - `%lngds` - Longitude degrees, integer, signed
+    # - `%lngd`  - Longitude degrees, integer, unsigned
+    # - `%lngm`  - Longitude minutes, integer, unsigned
+    # - `lngs`   - Longitude seconds, floating point, unsigned
+    # - `%lngh`` - Longitude hemisphere, "E" or "W"
+    #
+    # Examples:
+    #
+    # ```
+    # g = Geo::Coord.new(50.004444, 36.231389)
+    # g.strfcoord('%+lat, %+lng')
+    # # => "+50.004444, +36.231389"
+    # g.strfcoord("%latd°%latm'%lath -- %lngd°%lngm'%lngh")
+    # # => "50°0'N -- 36°13'E"
+    # ```
+    #
+    # `strfcoord` handles seconds rounding implicitly:
+    #
+    # ```
+    # pos = Geo::Coord.new(0.033333, 91.333333)
+    # pos.strfcoord('%latd %latm %0.5lats') # => "0 1 59.99880"
+    # pos.strfcoord('%latd %latm %lats')  # => "0 2 0"
+    # ```
     def strfcoord(formatstr)
       h = full_hash
 
