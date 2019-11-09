@@ -26,18 +26,18 @@ require "geo_coord"
 c = Geo::Coord.new(50.004444, 36.231389)
 
 c.to_s
-# => "50°0'16\"N 36°13'53\"E"
+# => 50°0'16"N 36°13'53"E
 
 c.to_s(dms: false)
-# => "50.004444,36.231389"
+# => 50.004444,36.231389
 
-c.strfcoord(%{%latd %latm' %lats" %lath, %lngd %lngm' %lngs" %lngh})
-# => "50°0'16\"N 36°13'53\"E"
+c.strfcoord(%{%latd %latm' %0.1lats" %lath, %lngd %lngm' %0.1lngs" %lngh})
+# => 50 0' 16.0" N, 36 13' 53.0" E
 ```
 
 ### Formatting
 
-Formats coordinates according to directives.
+`Geo::Coord#strfcoord` formats coordinates according to directives.
 
 Each directive starts with `%` and can contain some modifiers before its name.
 
