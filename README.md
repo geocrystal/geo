@@ -49,7 +49,7 @@ Acceptable modifiers:
 
 List of directives:
 
-| Directive | Decsription
+| Directive | Description
 | --------- | ------------------------------------------- |
 | `%lat`    | Full latitude, floating point, signed       |
 | `%latds`  | Latitude degrees, integer, signed           |
