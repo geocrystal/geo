@@ -1,6 +1,5 @@
-require "spec"
-require "../../src/geo_coord"
-require "../../src/geo_coord/distance"
+require "../spec_helper"
+require "../../src/geo/distance"
 
 describe Geo::Coord do
   london = Geo::Coord.new(51.500153, -0.126236)

@@ -1,9 +1,9 @@
-name: geo_coord
+name: geo
 version: 0.2.2
 
 dependencies:
   haversine:
-    github: mamantoha/haversine
+    github: geocrystal/haversine
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
