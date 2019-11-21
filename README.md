@@ -1,10 +1,10 @@
-# Geo::Coord
+# Geo
 
-[![Build Status](https://travis-ci.org/mamantoha/geo_coord.svg?branch=master)](https://travis-ci.org/mamantoha/geo_coord)
-[![GitHub release](https://img.shields.io/github/release/mamantoha/geo_coord.svg)](https://github.com/mamantoha/geo_coord/releases)
-[![License](https://img.shields.io/github/license/mamantoha/geo_coord.svg)](https://github.com/mamantoha/geo_coord/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/geocrystal/geo.svg?branch=master)](https://travis-ci.org/geocrystal/geo)
+[![GitHub release](https://img.shields.io/github/release/geocrystal/geo.svg)](https://github.com/geocrystal/geo/releases)
+[![License](https://img.shields.io/github/license/geocrystal/geo.svg)](https://github.com/geocrystal/geo/blob/master/LICENSE)
 
-Geo Coordinates class for Crystal, inspired by the Ruby's [geo_coord](https://github.com/zverok/geo_coord) gem.
+Geospatial primitives, algorithms, and utilities for Crystal.
 
 ## Installation
 
@@ -12,8 +12,8 @@ Geo Coordinates class for Crystal, inspired by the Ruby's [geo_coord](https://gi
 
    ```yaml
    dependencies:
-     geo_coord:
-       github: mamantoha/geo_coord
+     geo:
+       github: geocrystal/geo
    ```
 
 2. Run `shards install`
@@ -21,7 +21,7 @@ Geo Coordinates class for Crystal, inspired by the Ruby's [geo_coord](https://gi
 ## Usage
 
 ```crystal
-require "geo_coord"
+require "geo"
 
 c = Geo::Coord.new(50.004444, 36.231389)
 
@@ -84,11 +84,11 @@ pos.strfcoord('%latd %latm %lats')  # => "0 2 0"
 
 ### Calculate distances between two coords
 
-Haversine formula from [haversine](https://github.com/mamantoha/haversine) shard is used.
+Haversine formula from [haversine](https://github.com/geocrystal/haversine) shard is used.
 
 ```crystal
-require "geo_coord"
-require "geo_coord/distance"
+require "geo"
+require "geo/distance"
 
 london = Geo::Coord.new(51.500153, -0.126236)
 new_york = Geo::Coord.new(40.714268, -74.005974)
@@ -99,7 +99,7 @@ new_york.distance(london).to_kilometers
 
 ## Contributing
 
-1. Fork it (<https://github.com/mamantoha/geo_coord/fork>)
+1. Fork it (<https://github.com/geocrystal/geo/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
