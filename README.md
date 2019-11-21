@@ -4,7 +4,7 @@
 [![GitHub release](https://img.shields.io/github/release/geocrystal/geo.svg)](https://github.com/geocrystal/geo/releases)
 [![License](https://img.shields.io/github/license/geocrystal/geo.svg)](https://github.com/geocrystal/geo/blob/master/LICENSE)
 
-Geo Coordinates class for Crystal, inspired by the Ruby's [geo_coord](https://github.com/zverok/geo_coord) gem.
+Geospatial primitives, algorithms, and utilities for Crystal.
 
 ## Installation
 
