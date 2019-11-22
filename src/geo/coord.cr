@@ -1,4 +1,5 @@
 module Geo
+  # A `Coord` is a point in geographical coordinates: latitude and longitude.
   struct Coord
     getter :lat
     getter :lng

@@ -1,5 +1,6 @@
 module Geo
-  # A `Polygon` is a fixed-size, immutable, stack-allocated sequence of `Geo::Coord`
+  # A `Polygon` is a fixed-size, immutable, stack-allocated sequence of `Geo::Coord`.
+  # Additionally, polygons form a closed loop and define a filled region.
   struct Polygon
     include Indexable(Geo::Coord)
 
