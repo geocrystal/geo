@@ -98,9 +98,11 @@ describe Geo::Coord do
 
   describe "equality comparisons" do
     pos1 = Geo::Coord.new(45.3142533036254, -93.47527313511819)
-    pos2 = Geo::Coord.new(45.31232182518015, -93.34893036168069)
+    pos2 = Geo::Coord.new(45.3142533036254, -93.47527313511819)
+    pos3 = Geo::Coord.new(45.31232182518015, -93.34893036168069)
 
     it { (pos1 == pos1).should be_truthy }
-    it { (pos1 == pos2).should be_falsey }
+    it { (pos1 == pos2).should be_truthy }
+    it { (pos1 == pos3).should be_falsey }
   end
 end

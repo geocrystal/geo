@@ -1,10 +1,12 @@
 module Geo
-  class Polygon
-    getter coords
+  # A `Polygon` is a fixed-size, immutable, stack-allocated sequence of `Geo::Coord`
+  struct Polygon
+    include Indexable(Geo::Coord)
+
     @centroid : Geo::Coord? = nil
 
     def initialize(@coords : Array(Geo::Coord))
-      # A Polygon must be 'closed', the last coord equal to the first coord
+      # A polygon` must be 'closed', the last coord equal to the first coord
       # Append the first coord to the array to close the polygon
       @coords << @coords.first if @coords.first != @coords.last
     end
@@ -32,7 +34,26 @@ module Geo
     end
 
     def centroid : Geo::Coord
+      # A polygon is static and can not be updated with new coords, as a result
+      # calculate the centroid once and store it when requested.
       @centroid ||= calculate_centroid
+    end
+
+    def unsafe_fetch(index : Int)
+      @coords[index]
+    end
+
+    def size
+      @coords.size
+    end
+
+    def ==(other : Geo::Polygon) : Bool
+      min_size = Math.min(size, other.size)
+      0.upto(min_size - 1) do |i|
+        return false unless self[i] == other[i]
+      end
+
+      size == other.size
     end
 
     private def calculate_centroid : Geo::Coord

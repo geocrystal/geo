@@ -1,5 +1,5 @@
 module Geo
-  class Coord
+  struct Coord
     getter :lat
     getter :lng
 
@@ -152,7 +152,7 @@ module Geo
       strfcoord(format)
     end
 
-    def ==(other : Geo::Coord)
+    def ==(other : Geo::Coord) : Bool
       {lat, lng} == {other.lat, other.lng}
     end
 

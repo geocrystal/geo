@@ -9,13 +9,12 @@ describe Geo::Polygon do
   pos5 = Geo::Coord.new(45.3142533036254, -93.47527313511819)
 
   describe "#initialize" do
-    describe "a polygon must be closed" do
-      coords = [pos1, pos2, pos3, pos4]
-      polygon = Geo::Polygon.new(coords)
+    coords = [pos1, pos2, pos3, pos4]
+    polygon = Geo::Polygon.new(coords)
 
-      it { polygon.coords.size.should eq(5) }
-      it { polygon.coords.last.should eq(pos1) }
-    end
+    it { polygon.last.should eq(pos1) }
+    it { polygon.size.should eq(5) }
+    it { polygon[2].should eq(pos3) }
   end
 
   describe "#contains?" do
@@ -35,5 +34,15 @@ describe Geo::Polygon do
     center_coord = Geo::Coord.new(45.27463866133501, -93.41400121829719)
 
     it { polygon.centroid.should eq(center_coord) }
+  end
+
+  describe "equality comparisons" do
+    polygon1 = Geo::Polygon.new([pos1, pos2])
+    polygon2 = Geo::Polygon.new([pos1, pos2])
+    polygon3 = Geo::Polygon.new([pos1, pos2, pos3])
+
+    it { (polygon1 == polygon1).should be_truthy }
+    it { (polygon1 == polygon2).should be_truthy }
+    it { (polygon1 == polygon3).should be_falsey }
   end
 end
