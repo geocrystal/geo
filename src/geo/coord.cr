@@ -152,6 +152,10 @@ module Geo
       strfcoord(format)
     end
 
+    def ==(other : Geo::Coord)
+      {lat, lng} == {other.lat, other.lng}
+    end
+
     private def guard_seconds(pattern : String, result : String) : Array(String)?
       if m = pattern.match(/<(lat|lng)s>/)
         return [result, ""] unless m && result.starts_with?("60")

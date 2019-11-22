@@ -95,4 +95,12 @@ describe Geo::Coord do
       it { neg.to_s(dms: false).should eq("-50.004444,-36.231389") }
     end
   end
+
+  describe "equality comparisons" do
+    pos1 = Geo::Coord.new(45.3142533036254, -93.47527313511819)
+    pos2 = Geo::Coord.new(45.31232182518015, -93.34893036168069)
+
+    it {(pos1 == pos1).should be_truthy}
+    it {(pos1 == pos2).should be_falsey}
+  end
 end
