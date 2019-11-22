@@ -152,8 +152,12 @@ module Geo
       strfcoord(format)
     end
 
+    def ll
+      {lat, lng}
+    end
+
     def ==(other : Geo::Coord) : Bool
-      {lat, lng} == {other.lat, other.lng}
+      ll == other.ll
     end
 
     private def guard_seconds(pattern : String, result : String) : Array(String)?
