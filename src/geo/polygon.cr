@@ -5,11 +5,13 @@ module Geo
     include Indexable(Geo::Coord)
 
     @centroid : Geo::Coord? = nil
+    getter size : Int32
 
     def initialize(@coords : Array(Geo::Coord))
       # A polygon` must be 'closed', the last coord equal to the first coord
       # Append the first coord to the array to close the polygon
       @coords << @coords.first if @coords.first != @coords.last
+      @size = @coords.size
     end
 
     def contains?(coord : Geo::Coord) : Bool
@@ -42,10 +44,6 @@ module Geo
 
     def unsafe_fetch(index : Int)
       @coords[index]
-    end
-
-    def size
-      @coords.size
     end
 
     def ==(other : Geo::Polygon) : Bool
