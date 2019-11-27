@@ -96,13 +96,35 @@ describe Geo::Coord do
     end
   end
 
-  describe "equality comparisons" do
-    pos1 = Geo::Coord.new(45.3142533036254, -93.47527313511819)
-    pos2 = Geo::Coord.new(45.3142533036254, -93.47527313511819)
-    pos3 = Geo::Coord.new(45.31232182518015, -93.34893036168069)
+  describe "comparisons" do
+    describe "equality" do
+      pos1 = Geo::Coord.new(45.3142533036254, -93.47527313511819)
+      pos2 = Geo::Coord.new(45.3142533036254, -93.47527313511819)
+      pos3 = Geo::Coord.new(45.31232182518015, -93.34893036168069)
 
-    it { (pos1 == pos1).should be_truthy }
-    it { (pos1 == pos2).should be_truthy }
-    it { (pos1 == pos3).should be_falsey }
+      it { (pos1 == pos1).should be_truthy }
+      it { (pos1 == pos2).should be_truthy }
+      it { (pos1 == pos3).should be_falsey }
+    end
+
+    describe "lexicographical order" do
+      pos1 = Geo::Coord.new(1.0, 2.0)
+      pos2 = Geo::Coord.new(2.0, 1.0)
+
+      pos3 = Geo::Coord.new(1.0, 1.0)
+      pos4 = Geo::Coord.new(0.0, 0.0)
+      pos5 = Geo::Coord.new(-1.0, -1.0)
+
+      it { (pos1 < pos2).should be_truthy }
+      it { (pos3 < pos1).should be_truthy }
+      it { (pos3 < pos1).should be_truthy }
+
+      it { pos4.between?(pos5, pos3).should be_truthy }
+      it { pos4.between?(pos3, pos5).should be_truthy }
+      it { pos1.between?(pos5, pos3).should be_falsey }
+
+      it { [pos4, pos5, pos3].min.should eq(pos5) }
+      it { [pos4, pos5, pos3].max.should eq(pos3) }
+    end
   end
 end

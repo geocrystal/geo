@@ -1,6 +1,8 @@
 module Geo
   # A `Coord` is a point in geographical coordinates: latitude and longitude.
   struct Coord
+    include Comparable(Geo::Coord)
+
     getter :lat
     getter :lng
 
@@ -157,8 +159,22 @@ module Geo
       {lat, lng}
     end
 
-    def ==(other : Geo::Coord) : Bool
-      ll == other.ll
+    def <=>(other : Geo::Coord)
+      ll <=> other.ll
+    end
+
+    def between?(p1 : Geo::Coord, p2 : Geo::Coord)
+      min, max = [p1, p2].minmax
+
+      if cmp = self <=> min
+        return false if cmp < 0
+      end
+
+      if cmp = self <=> max
+        return false if cmp > 0
+      end
+
+      true
     end
 
     private def guard_seconds(pattern : String, result : String) : Array(String)?

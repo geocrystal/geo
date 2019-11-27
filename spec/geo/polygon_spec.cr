@@ -36,13 +36,15 @@ describe Geo::Polygon do
     it { polygon.centroid.should eq(center_coord) }
   end
 
-  describe "equality comparisons" do
-    polygon1 = Geo::Polygon.new([pos1, pos2])
-    polygon2 = Geo::Polygon.new([pos1, pos2])
-    polygon3 = Geo::Polygon.new([pos1, pos2, pos3])
+  describe "comparisons" do
+    describe "equality" do
+      polygon1 = Geo::Polygon.new([pos1, pos2])
+      polygon2 = Geo::Polygon.new([pos1, pos2])
+      polygon3 = Geo::Polygon.new([pos1, pos2, pos3])
 
-    it { (polygon1 == polygon1).should be_truthy }
-    it { (polygon1 == polygon2).should be_truthy }
-    it { (polygon1 == polygon3).should be_falsey }
+      it { (polygon1 == polygon1).should be_truthy }
+      it { (polygon1 == polygon2).should be_truthy }
+      it { (polygon1 == polygon3).should be_falsey }
+    end
   end
 end
