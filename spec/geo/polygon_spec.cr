@@ -12,9 +12,42 @@ describe Geo::Polygon do
     coords = [pos1, pos2, pos3, pos4]
     polygon = Geo::Polygon.new(coords)
 
-    it { polygon.last.should eq(pos1) }
     it { polygon.size.should eq(5) }
-    it { polygon[2].should eq(pos3) }
+    it { (polygon.first == polygon.last).should be_truthy }
+
+    it "should not allow to change coods after initialize" do
+      polygon.coords << Geo::Coord.new(0.0, 0.0)
+      polygon.size.should eq(5)
+    end
+
+    describe "lexicographical order" do
+      pos_sw = Geo::Coord.new(-1.0, -1.0)
+      pos_se = Geo::Coord.new(1.0, -1.0)
+      pos_ne = Geo::Coord.new(1.0, 1.0)
+      pos_nw = Geo::Coord.new(-1.0, 1.0)
+
+      lexicographical_order = [pos_sw, pos_se, pos_ne, pos_nw, pos_sw]
+
+      it do
+        polygon = Geo::Polygon.new([pos_sw, pos_se, pos_ne, pos_nw])
+        polygon.coords.should eq(lexicographical_order)
+      end
+
+      it do
+        polygon = Geo::Polygon.new([pos_se, pos_ne, pos_nw, pos_sw])
+        polygon.coords.should eq(lexicographical_order)
+      end
+
+      it do
+        polygon = Geo::Polygon.new([pos_se, pos_ne, pos_nw, pos_sw, pos_se])
+        polygon.coords.should eq(lexicographical_order)
+      end
+
+      it "clockwise" do
+        clockwise_polygon = Geo::Polygon.new([pos_nw, pos_ne, pos_se, pos_sw])
+        clockwise_polygon.coords.should eq(lexicographical_order)
+      end
+    end
   end
 
   describe "#contains?" do
@@ -41,10 +74,14 @@ describe Geo::Polygon do
       polygon1 = Geo::Polygon.new([pos1, pos2])
       polygon2 = Geo::Polygon.new([pos1, pos2])
       polygon3 = Geo::Polygon.new([pos1, pos2, pos3])
+      polygon4 = Geo::Polygon.new([pos2, pos1])
+      polygon5 = Geo::Polygon.new([pos1, pos2, pos1])
 
       it { (polygon1 == polygon1).should be_truthy }
       it { (polygon1 == polygon2).should be_truthy }
       it { (polygon1 == polygon3).should be_falsey }
+      it { (polygon1 == polygon4).should be_truthy }
+      it { (polygon1 == polygon5).should be_truthy }
     end
   end
 end

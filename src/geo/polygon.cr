@@ -1,5 +1,6 @@
 module Geo
   # A `Polygon` is a fixed-size, immutable, stack-allocated sequence of `Geo::Coord`.
+  # Coordinates are in lexicographical order.
   # Additionally, polygons form a closed loop and define a filled region.
   struct Polygon
     include Indexable(Geo::Coord)
@@ -8,10 +9,44 @@ module Geo
     getter size : Int32
 
     def initialize(@coords : Array(Geo::Coord))
-      # A polygon` must be 'closed', the last coord equal to the first coord
+      @coords = order_coords
+
+      # A polygon must be 'closed', the last coord equal to the first coord
       # Append the first coord to the array to close the polygon
-      @coords << @coords.first if @coords.first != @coords.last
+      @coords << @coords.first
       @size = @coords.size
+    end
+
+    def coords
+      @coords
+    end
+
+    # Order coords in lexicographical order.
+    # Starts from its leftmost point to the rightmost point in counterclockwise order.
+    # Returns "not-closed" array of coordinates.
+    private def order_coords
+      ordered_coords = @coords
+
+      min = @coords.min
+
+      if min_idx = @coords.index(min)
+        ordered_coords =
+          if @coords.first == @coords.last
+            @coords[...-1].rotate(min_idx)
+          else
+            @coords.rotate(min_idx)
+          end
+      end
+
+      clockwise? ? ordered_coords.rotate.reverse : ordered_coords
+    end
+
+    private def clockwise?
+      p1 = @coords[0]
+      p2 = @coords[1]
+      p3 = @coords[-2]
+
+      Geo::Utils.orientation(p1, p2, p3) == 1 ? true : false
     end
 
     def contains?(coord : Geo::Coord) : Bool

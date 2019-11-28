@@ -1,3 +1,4 @@
+require "./geo/utils"
 require "./geo/coord"
 require "./geo/polygon"
 
