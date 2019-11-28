@@ -22,7 +22,7 @@ module Geo
     end
 
     # Order coords in lexicographical order.
-    # Starts from its leftmost point to the rightmost point in counterclockwise order.
+    # Starts from its bottom-most point in counterclockwise order.
     # Returns "not-closed" array of coordinates.
     private def order_coords
       ordered_coords = @coords
