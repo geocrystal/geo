@@ -5,7 +5,7 @@ module Geo
     # Calculates distance to `other`.
     # Haversine formula is used.
     def distance(other : Geo::Coord) : Haversine::Distance
-      Haversine.distance(self.lat, self.lng, other.lat, other.lng)
+      Haversine.distance(self.ll, other.ll)
     end
   end
 end
