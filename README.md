@@ -20,6 +20,8 @@ Geospatial primitives, algorithms, and utilities for Crystal.
 
 ## Usage
 
+A `Geo::Coords` is a point in geographical coordinates: latitude and longitude.
+
 ```crystal
 require "geo"
 
@@ -33,6 +35,47 @@ c.to_s(dms: false)
 
 c.strfcoord(%{%latd %latm' %0.1lats" %lath, %lngd %lngm' %0.1lngs" %lngh})
 # => 50 0' 16.0" N, 36 13' 53.0" E
+```
+
+### Polygon
+
+A polygon represents an area enclosed by a closed path (or loop), which is defined by a series of coordinates.
+
+```crystal
+require "geo"
+
+pos1 = Geo::Coord.new(45.3142533036254, -93.47527313511819)
+pos2 = Geo::Coord.new(45.31232182518015, -93.34893036168069)
+pos3 = Geo::Coord.new(45.23694281999268, -93.35167694371194)
+pos4 = Geo::Coord.new(45.23500870841669, -93.47801971714944)
+
+polygon = Geo::Polygon.new([pos1, pos2, pos3, pos4])
+```
+
+The Polygon in the example above consists of four sets of `Geo::Coord` coordinates, but notice that the first and last sets define the same location, which completes the loop. In practice, however, since polygons define closed areas, you don't need to specify the last set of coordinates. Ot will automatically complete the polygon by connecting the last location back to the first location.
+
+The following example is identical to the previous one, except that the last `Geo::Coord` is omitted:
+
+```crystal
+require "geo"
+
+pos1 = Geo::Coord.new(45.3142533036254, -93.47527313511819)
+pos2 = Geo::Coord.new(45.31232182518015, -93.34893036168069)
+pos3 = Geo::Coord.new(45.23694281999268, -93.35167694371194)
+
+polygon = Geo::Polygon.new([pos1, pos2, pos3])
+```
+
+Additional actions:
+
+```crystal
+coord_inside = Geo::Coord.new(45.27428243796789, -93.41648483416066)
+coord_outside = Geo::Coord.new(45.45411010558687, -93.78151703160256)
+
+polygon.contains?(coord_inside)  # => true
+polygon.contains?(coord_outside) # => false
+
+polygon.centroid # => Geo::Coord(@lat=45.27463866133501, @lng=-93.41400121829719)
 ```
 
 ### Formatting
