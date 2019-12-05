@@ -1,3 +1,4 @@
+require "convex_hull"
 require "./geo/utils"
 require "./geo/coord"
 require "./geo/polygon"
