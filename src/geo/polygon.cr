@@ -8,14 +8,6 @@ module Geo
     @centroid : Geo::Coord? = nil
     getter size : Int32
 
-    def from_convex_hull(coords : Array(Geo::Coord))
-      points = @coords.map { |coord| {coord.lat, coord.lng} }
-      convex_hull = ConvexHull::GrahamScan.new(points)
-      hull = convex_hull.convex_hull
-
-      hull.map { |point| Geo::Coord.new(point.x.as(Float32 | Float64), point.y.as(Float32 | Float64)) }
-    end
-
     def initialize(@coords : Array(Geo::Coord), convex_hull = false)
       if convex_hull
         @coords = from_convex_hull(@coords)
@@ -125,6 +117,15 @@ module Geo
       centroid_lng /= (6.0 * signed_area)
 
       Geo::Coord.new(centroid_lat, centroid_lng)
+    end
+
+    # Computation of convex hulls of a finite point set
+    private def make_convex_hull(coords : Array(Geo::Coord))
+      points = @coords.map { |coord| {coord.lat, coord.lng} }
+      convex_hull = ConvexHull::GrahamScan.new(points)
+      hull = convex_hull.convex_hull
+
+      hull.map { |point| Geo::Coord.new(point.x.as(Float32 | Float64), point.y.as(Float32 | Float64)) }
     end
   end
 end

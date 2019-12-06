@@ -78,6 +78,26 @@ polygon.contains?(coord_outside) # => false
 polygon.centroid # => Geo::Coord(@lat=45.27463866133501, @lng=-93.41400121829719)
 ```
 
+Additionally you can initialize polygon as [convex hull](https://en.wikipedia.org/wiki/Convex_hull) from coordinates of points.
+
+```crystal
+points = [
+  {1.0, 1.0},
+  {1.0, 0.0},
+  {1.0, -1.0},
+  {0.0, -1.0},
+  {-1.0, -1.0},
+  {-1.0, 0.0},
+  {-1.0, 1.0},
+  {0.0, 1.0},
+  {0.0, 0.0},
+].map { |point| Geo::Coord.new(point[0], point[1]) }
+
+polygon = Geo::Polygon.new(points, convex_hull: true)
+polygon.coords
+# => {-1.0, -1.0}, {1.0, -1.0}, {1.0, 1.0}, {-1.0, 1.0}, {-1.0, -1.0}
+```
+
 ### Formatting
 
 `Geo::Coord#strfcoord` formats coordinates according to directives.
