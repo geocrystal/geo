@@ -10,7 +10,7 @@ module Geo
 
     def initialize(@coords : Array(Geo::Coord), convex_hull = false)
       if convex_hull
-        @coords = from_convex_hull(@coords)
+        @coords = make_convex_hull(@coords)
       end
 
       @coords = order_coords
