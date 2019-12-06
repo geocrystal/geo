@@ -48,6 +48,20 @@ describe Geo::Polygon do
         clockwise_polygon.coords.should eq(lexicographical_order)
       end
     end
+
+    context "convex hull" do
+      points = [
+        {1.0, 1.0}, {1.0, 0.0}, {1.0, -1.0}, {0.0, -1.0}, {-1.0, -1.0}, {-1.0, 0.0}, {-1.0, 1.0}, {0.0, 1.0}, {0.0, 0.0},
+      ].map { |point| Geo::Coord.new(point[0], point[1]) }
+
+      expected = [
+        {-1.0, -1.0}, {1.0, -1.0}, {1.0, 1.0}, {-1.0, 1.0}, {-1.0, -1.0},
+      ].map { |point| Geo::Coord.new(point[0], point[1]) }
+
+      polygon = Geo::Polygon.new(points, convex_hull: true)
+
+      it { polygon.coords.should eq(expected) }
+    end
   end
 
   describe "#contains?" do
