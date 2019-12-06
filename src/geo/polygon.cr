@@ -25,6 +25,11 @@ module Geo
       @coords
     end
 
+    # Evaluate area of a polygon using shoelace formula
+    def area
+      @coords.each_cons(2).sum { |p| p[0].shoelace(p[1]) }.abs.fdiv(2)
+    end
+
     # Order coords in lexicographical order.
     # Starts from its bottom-most point in counterclockwise order.
     # Returns "not-closed" array of coordinates.
