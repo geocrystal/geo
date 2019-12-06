@@ -98,6 +98,8 @@ polygon.coords
 # => {-1.0, -1.0}, {1.0, -1.0}, {1.0, 1.0}, {-1.0, 1.0}, {-1.0, -1.0}
 ```
 
+The convex hull is computed using the [convex_hull](github.com/geocrystal/convex_hull) library.
+
 ### Formatting
 
 `Geo::Coord#strfcoord` formats coordinates according to directives.
