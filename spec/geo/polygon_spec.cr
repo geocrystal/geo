@@ -83,6 +83,19 @@ describe Geo::Polygon do
     it { polygon.centroid.should eq(center_coord) }
   end
 
+  describe "#area" do
+    coords = [
+      Geo::Coord.new(-3, -2),
+      Geo::Coord.new(-1, 4),
+      Geo::Coord.new(6, 1),
+      Geo::Coord.new(3, 10),
+      Geo::Coord.new(-4, 9),
+    ]
+    polygon = Geo::Polygon.new(coords)
+
+    it { polygon.area.should eq(60.0) }
+  end
+
   describe "comparisons" do
     describe "equality" do
       polygon1 = Geo::Polygon.new([pos1, pos2])

@@ -3,6 +3,8 @@ module Geo
   struct Coord
     include Comparable(Geo::Coord)
 
+    alias Number = Int32 | Float32 | Float64
+
     getter :lat
     getter :lng
 
@@ -27,7 +29,7 @@ module Geo
       /%(#{FLOATFLAGS})?lng/   => ->(m : Regex::MatchData) { "%<lng>#{m[1]}f" },
     }
 
-    def initialize(@lat : Float32 | Float64, @lng : Float32 | Float64)
+    def initialize(@lat : Number, @lng : Number)
     end
 
     # Returns latitude degrees
@@ -41,7 +43,7 @@ module Geo
     end
 
     # Returns latitude seconds
-    def lats : Float32 | Float64
+    def lats : Number
       (lat.abs * 3600) % 60
     end
 
@@ -61,7 +63,7 @@ module Geo
     end
 
     # Returns longitude seconds
-    def lngs : Float32 | Float64
+    def lngs : Number
       (lng.abs * 3600) % 60
     end
 
@@ -175,6 +177,10 @@ module Geo
       end
 
       true
+    end
+
+    def shoelace(other : Geo::Coord)
+      lat * other.lng - lng * other.lat
     end
 
     private def guard_seconds(pattern : String, result : String) : Array(String)?
