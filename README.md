@@ -20,7 +20,7 @@ Geospatial primitives, algorithms, and utilities for Crystal.
 
 ## Usage
 
-A `Geo::Coords` is a point in geographical coordinates: latitude and longitude.
+A `Geo::Coord` is a point in geographical coordinates: latitude and longitude.
 
 ```crystal
 require "geo"
