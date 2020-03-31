@@ -1,12 +1,11 @@
 name: geo
-version: 0.5.0
+version: 0.6.0
 
 dependencies:
   haversine:
     github: geocrystal/haversine
   convex_hull:
     github: geocrystal/convex_hull
-
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
