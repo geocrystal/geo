@@ -27,14 +27,14 @@ require "geo"
 
 c = Geo::Coord.new(50.004444, 36.231389)
 
-c.to_s
-# => 50°0'16"N 36°13'53"E
-
-c.to_s(dms: false)
-# => 50.004444,36.231389
-
 c.strfcoord(%{%latd %latm' %0.1lats" %lath, %lngd %lngm' %0.1lngs" %lngh})
 # => 50 0' 16.0" N, 36 13' 53.0" E
+
+c.strfcoord("%lat,%lng")
+# => "-50.004444,-36.231389"
+
+c.to_s
+# => 50°0'16"N 36°13'53"E
 ```
 
 ### Polygon
