@@ -89,10 +89,8 @@ describe Geo::Coord do
       neg = Geo::Coord.new(-50.004444, -36.231389)
 
       it { pos.to_s.should eq(%{50°0'16"N 36°13'53"E}) }
-      it { pos.to_s(dms: false).should eq("50.004444,36.231389") }
-
       it { neg.to_s.should eq(%{50°0'16"S 36°13'53"W}) }
-      it { neg.to_s(dms: false).should eq("-50.004444,-36.231389") }
+      it { "#{pos}".should eq(%{50°0'16"N 36°13'53"E}) }
     end
   end
 

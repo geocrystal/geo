@@ -152,9 +152,8 @@ module Geo
     # g.to_s             # => "50°0'16\"N 36°13'53\"E"
     # g.to_s(dms: false) # => "50.004444,36.231389"
     # ```
-    def to_s(dms : Bool = true)
-      format = dms ? %{%latd°%latm'%lats"%lath %lngd°%lngm'%lngs"%lngh} : "%lat,%lng"
-      strfcoord(format)
+    def to_s(io)
+      io << strfcoord(%{%latd°%latm'%lats"%lath %lngd°%lngm'%lngs"%lngh})
     end
 
     def ll
