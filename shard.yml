@@ -1,5 +1,5 @@
 name: geo
-version: 0.6.0
+version: 0.6.1
 
 dependencies:
   haversine:
@@ -9,7 +9,5 @@ dependencies:
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
-
-crystal: 0.33.0
 
 license: MIT
