@@ -9,15 +9,15 @@ Geospatial primitives, algorithms, and utilities for Crystal.
 
 ## Installation
 
-1. Add the dependency to your `shard.yml`:
+Add this to your application's `shard.yml`:
 
-   ```yaml
-   dependencies:
-     geo:
-       github: geocrystal/geo
-   ```
+```yaml
+dependencies:
+  geo:
+    github: geocrystal/geo
+```
 
-2. Run `shards install`
+Run `shards install`
 
 ## Usage
 
