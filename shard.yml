@@ -7,6 +7,11 @@ dependencies:
   convex_hull:
     github: geocrystal/convex_hull
 
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+
+
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
 
