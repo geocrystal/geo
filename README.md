@@ -1,7 +1,8 @@
 # Geo
 
-[![Build Status](https://travis-ci.org/geocrystal/geo.svg?branch=master)](https://travis-ci.org/geocrystal/geo)
+![Crystal CI](https://github.com/geocrystal/geo/workflows/Crystal%20CI/badge.svg)
 [![GitHub release](https://img.shields.io/github/release/geocrystal/geo.svg)](https://github.com/geocrystal/geo/releases)
+[![Docs](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://geocrystal.github.io/geo/)
 [![License](https://img.shields.io/github/license/geocrystal/geo.svg)](https://github.com/geocrystal/geo/blob/master/LICENSE)
 
 Geospatial primitives, algorithms, and utilities for Crystal.
