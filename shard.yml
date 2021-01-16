@@ -1,5 +1,7 @@
 name: geo
-version: 0.6.1
+version: 0.6.2
+
+crystal: ">= 0.35.1"
 
 dependencies:
   haversine:

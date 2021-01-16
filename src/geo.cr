@@ -4,5 +4,5 @@ require "./geo/coord"
 require "./geo/polygon"
 
 module Geo
-  VERSION = "0.6.1"
+  VERSION = {{ `shards version #{__DIR__}`.chomp.stringify }}
 end
