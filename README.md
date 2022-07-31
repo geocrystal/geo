@@ -29,13 +29,21 @@ require "geo"
 c = Geo::Coord.new(50.004444, 36.231389)
 
 c.strfcoord(%{%latd %latm' %0.1lats" %lath, %lngd %lngm' %0.1lngs" %lngh})
-# => 50 0' 16.0" N, 36 13' 53.0" E
+# => "50 0' 16.0" N, 36 13' 53.0" E"
 
 c.strfcoord("%lat,%lng")
 # => "-50.004444,-36.231389"
 
 c.to_s
-# => 50°0'16"N 36°13'53"E
+# => "50°0'16"N 36°13'53"E"
+
+pos = Geo::Coord.new(50.004444, 36.231389)
+
+pos.geohash
+# => "ubcu2rnbuxcx"
+
+pos.geohash(5)
+# => "ubcu2"
 ```
 
 ### Polygon
@@ -115,7 +123,7 @@ Acceptable modifiers:
 
 List of directives:
 
-| Directive | Description
+| Directive | Description                                 |
 | --------- | ------------------------------------------- |
 | `%lat`    | Full latitude, floating point, signed       |
 | `%latds`  | Latitude degrees, integer, signed           |
