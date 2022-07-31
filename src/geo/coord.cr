@@ -146,6 +146,11 @@ module Geo
       end
     end
 
+    # Returns a geohash representing coordinates.
+    def geohash(precision = 12)
+      Geohash.encode(lat.to_f, lng.to_f, precision)
+    end
+
     # Returns a string representing coordinates.
     #
     # ```

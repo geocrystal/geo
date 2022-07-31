@@ -83,6 +83,15 @@ describe Geo::Coord do
     end
   end
 
+  context "geohash" do
+    context "encode to geohash" do
+      pos = Geo::Coord.new(50.004444, 36.231389)
+
+      it { pos.geohash.should eq("ubcu2rnbuxcx") }
+      it { pos.geohash(5).should eq("ubcu2") }
+    end
+  end
+
   context "to_s" do
     context "is convertible to string" do
       pos = Geo::Coord.new(50.004444, 36.231389)

@@ -8,6 +8,8 @@ dependencies:
     github: geocrystal/haversine
   convex_hull:
     github: geocrystal/convex_hull
+  geohash:
+    github: geocrystal/geohash
 
 development_dependencies:
   ameba:
