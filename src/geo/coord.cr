@@ -125,7 +125,7 @@ module Geo
       h = full_hash
 
       DIRECTIVES.reduce(formatstr) do |memo, (from, to)|
-        memo.gsub(from) do |match|
+        memo.gsub(from) do
           to =
             if to.is_a?(Proc) && from.is_a?(Regex) && (match_data = memo.match(from))
               to.call(match_data)
