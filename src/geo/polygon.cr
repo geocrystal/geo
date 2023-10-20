@@ -128,7 +128,7 @@ module Geo
     private def make_convex_hull(coords : Array(Geo::Coord))
       points = @coords.map { |coord| {coord.lat, coord.lng} }
       convex_hull = ConvexHull::GrahamScan.new(points)
-      hull = convex_hull.convex_hull
+      hull = convex_hull.to_a
 
       hull.map { |point| Geo::Coord.new(point.x.as(Float32 | Float64), point.y.as(Float32 | Float64)) }
     end
