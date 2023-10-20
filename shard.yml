@@ -8,6 +8,7 @@ dependencies:
     github: geocrystal/haversine
   convex_hull:
     github: geocrystal/convex_hull
+    version: ">= 0.6.0"
   geohash:
     github: geocrystal/geohash
 
