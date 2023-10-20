@@ -121,12 +121,17 @@ module Geo
     # pos.strfcoord('%latd %latm %0.5lats') # => "0 1 59.99880"
     # pos.strfcoord('%latd %latm %lats')  # => "0 2 0"
     # ```
-    def strfcoord(formatstr)
+    def strfcoord(formatstr) : String
       h = full_hash
 
       DIRECTIVES.reduce(formatstr) do |memo, (from, to)|
-        memo.gsub(from) do
-          to = to.call($~) if to.is_a?(Proc)
+        memo.gsub(from) do |match|
+          to =
+            if to.is_a?(Proc) && from.is_a?(Regex) && (match_data = memo.match(from))
+              to.call(match_data)
+            else
+              to.as(String)
+            end
 
           res = to % h
 
