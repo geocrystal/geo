@@ -61,8 +61,7 @@ module Geo
     def contains?(coord : Geo::Coord) : Bool
       last_coord = @coords.last
       odd_nodes = false
-      x = coord.lng
-      y = coord.lat
+      y, x = coord.ll
 
       @coords.each do |iter_coord|
         yi, xi = iter_coord.ll
@@ -91,6 +90,7 @@ module Geo
 
     def ==(other : Geo::Polygon) : Bool
       min_size = Math.min(size, other.size)
+
       0.upto(min_size - 1) do |i|
         return false unless self[i] == other[i]
       end
