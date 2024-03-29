@@ -11,6 +11,8 @@ dependencies:
     version: ">= 0.6.0"
   geohash:
     github: geocrystal/geohash
+  geo_bearing:
+    github: geocrystal/geo_bearing
 
 development_dependencies:
   ameba:
