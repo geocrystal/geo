@@ -27,7 +27,7 @@ module Geo
 
     # Evaluate area of a polygon using shoelace formula
     def area
-      @coords.each_cons(2).sum { |p| p[0].shoelace(p[1]) }.abs.fdiv(2)
+      @coords.each_cons_pair.sum { |lat, lng| lat.shoelace(lng) }.abs.fdiv(2)
     end
 
     # Order coords in lexicographical order.
@@ -64,17 +64,16 @@ module Geo
       x = coord.lng
       y = coord.lat
 
-      @coords.each do |p|
-        yi = p.lat
-        xi = p.lng
-        yj = last_coord.lat
-        xj = last_coord.lng
+      @coords.each do |iter_coord|
+        yi, xi = iter_coord.ll
+        yj, xj = last_coord.ll
+
         if yi < y && yj >= y ||
            yj < y && yi >= y
           odd_nodes = !odd_nodes if xi + (y - yi) / (yj - yi) * (xj - xi) < x
         end
 
-        last_coord = p
+        last_coord = iter_coord
       end
 
       odd_nodes
