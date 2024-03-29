@@ -21,13 +21,5 @@ module Geo
       return 0 if val == 0 # colinear
       val > 0 ? 1 : 2      # clockwise or counterclockwise
     end
-
-    def degrees_to_radians(degrees : Number) : Float64
-      degrees * Math::PI / 180.0
-    end
-
-    def radians_to_degrees(radians : Number) : Float64
-      radians * 180.0 / Math::PI
-    end
   end
 end
