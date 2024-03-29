@@ -1,5 +1,5 @@
 name: geo
-version: 0.7.1
+version: 0.7.2
 
 crystal: ">= 1.0.0"
 
@@ -15,7 +15,6 @@ dependencies:
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
