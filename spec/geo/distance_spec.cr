@@ -8,7 +8,7 @@ describe Geo::Coord do
   context "distance" do
     context "calculates distance (by haversine formula)" do
       it { london.distance(london).to_kilometers.should eq(0) }
-      it { new_york.distance(london).to_kilometers.should eq(5570.4744596620685) }
+      it { new_york.distance(london).to_kilometers.should eq(5570.482153929098) }
     end
   end
 end

@@ -6,6 +6,7 @@ crystal: ">= 1.0.0"
 dependencies:
   haversine:
     github: geocrystal/haversine
+    version: ">= 0.4.0"
   convex_hull:
     github: geocrystal/convex_hull
     version: ">= 0.6.0"
