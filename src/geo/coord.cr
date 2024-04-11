@@ -156,6 +156,10 @@ module Geo
       Geohash.encode(lat.to_f, lng.to_f, precision)
     end
 
+    def to_geojson : GeoJSON::Coordinates
+      GeoJSON::Coordinates.new(lng.to_f64, lat.to_f64)
+    end
+
     # Returns a string representing coordinates.
     #
     # ```

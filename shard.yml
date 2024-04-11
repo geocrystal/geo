@@ -16,6 +16,8 @@ dependencies:
     github: geocrystal/geo_bearing
   ring_area:
     github: geocrystal/ring_area
+  geojson:
+    github: geocrystal/geojson
 
 development_dependencies:
   ameba:
