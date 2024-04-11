@@ -1,5 +1,3 @@
-require "haversine"
-
 module Geo
   struct Coord
     # Calculates distance to `other`.
