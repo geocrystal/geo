@@ -171,6 +171,19 @@ new_york.distance(london).to_kilometers
 # => 5570.4744596620685
 ```
 
+### Calculates the location of a destination coord
+
+```crystal
+require "geo"
+require "geo/distance"
+
+point = Geo::Coord.new(39, -75)
+
+point.destination(5000, 90, :kilometers)
+# Geo::Coord(@lat=26.440010707631124, @lng=-22.885355549364313)
+```
+
+
 ## Contributing
 
 1. Fork it (<https://github.com/geocrystal/geo/fork>)
