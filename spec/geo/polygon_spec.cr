@@ -85,15 +85,19 @@ describe Geo::Polygon do
 
   describe "#area" do
     coords = [
-      Geo::Coord.new(-3, -2),
-      Geo::Coord.new(-1, 4),
-      Geo::Coord.new(6, 1),
-      Geo::Coord.new(3, 10),
-      Geo::Coord.new(-4, 9),
+      Geo::Coord.new(-15, 125),
+      Geo::Coord.new(-22, 113),
+      Geo::Coord.new(-37, 117),
+      Geo::Coord.new(-33, 130),
+      Geo::Coord.new(-39, 148),
+      Geo::Coord.new(-27, 154),
+      Geo::Coord.new(-15, 144),
+      Geo::Coord.new(-15, 125),
     ]
+
     polygon = Geo::Polygon.new(coords)
 
-    it { polygon.area.should eq(60.0) }
+    it { polygon.area.should eq(7748891609977.457) }
   end
 
   describe "comparisons" do

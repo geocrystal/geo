@@ -25,9 +25,11 @@ module Geo
       @coords
     end
 
-    # Evaluate area of a polygon using shoelace formula
+    # Return the approximate signed geodesic area of the polygon in square meters.
     def area
-      @coords.each_cons_pair.sum { |lat, lng| lat.shoelace(lng) }.abs.fdiv(2)
+      coordinates = @coords.map { |coord| [coord.lng, coord.lat] }
+
+      RingArea.ring_area(coordinates)
     end
 
     # Order coords in lexicographical order.

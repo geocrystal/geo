@@ -188,10 +188,6 @@ module Geo
       true
     end
 
-    def shoelace(other : Geo::Coord)
-      lat * other.lng - lng * other.lat
-    end
-
     private def guard_seconds(pattern : String, result : String) : Array(String)?
       if m = pattern.match(/<(lat|lng)s>/)
         return [result, ""] unless m && result.starts_with?("60")
