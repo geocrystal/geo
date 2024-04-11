@@ -100,6 +100,12 @@ module Geo
       size == other.size
     end
 
+    def to_geojson : GeoJSON::Polygon
+      coordinates = @coords.map { |coord| GeoJSON::Coordinates.new(coord.lng.to_f64, coord.lat.to_f64) }
+
+      GeoJSON::Polygon.new([coordinates])
+    end
+
     private def calculate_centroid : Geo::Coord
       centroid_lat = 0.0
       centroid_lng = 0.0

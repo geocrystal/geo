@@ -100,6 +100,24 @@ describe Geo::Polygon do
     it { polygon.area.should eq(7748891609977.457) }
   end
 
+  describe "#to_geojson" do
+    coords = [
+      Geo::Coord.new(-15, 125),
+      Geo::Coord.new(-22, 113),
+      Geo::Coord.new(-37, 117),
+      Geo::Coord.new(-33, 130),
+      Geo::Coord.new(-39, 148),
+      Geo::Coord.new(-27, 154),
+      Geo::Coord.new(-15, 144),
+      Geo::Coord.new(-15, 125),
+    ]
+
+    polygon = Geo::Polygon.new(coords)
+    geojson = polygon.to_geojson
+
+    geojson.should be_a(GeoJSON::Polygon)
+  end
+
   describe "comparisons" do
     describe "equality" do
       polygon1 = Geo::Polygon.new([pos1, pos2])

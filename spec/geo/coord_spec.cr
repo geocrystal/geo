@@ -103,6 +103,14 @@ describe Geo::Coord do
     end
   end
 
+  describe "#to_geojson" do
+    coord = Geo::Coord.new(-15, 125)
+
+    geojson = coord.to_geojson
+
+    geojson.should be_a(GeoJSON::Coordinates)
+  end
+
   describe "comparisons" do
     describe "equality" do
       pos1 = Geo::Coord.new(45.3142533036254, -93.47527313511819)
