@@ -25,8 +25,8 @@ module Geo
       @coords
     end
 
-    # Return the approximate signed geodesic area of the polygon in square meters.
-    def area
+    # Return the approximate signed geodesic area of the polygon.
+    def area : RingArea::Area
       coordinates = @coords.map { |coord| [coord.lng, coord.lat] }
 
       RingArea.ring_area(coordinates)
