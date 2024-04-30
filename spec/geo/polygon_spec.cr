@@ -97,7 +97,8 @@ describe Geo::Polygon do
 
     polygon = Geo::Polygon.new(coords)
 
-    it { polygon.area.should eq(7748891609977.457) }
+    it { polygon.area.should be_a(RingArea::Area) }
+    it { polygon.area.to_meters.should eq(7748891609977.457) }
   end
 
   describe "#to_geojson" do

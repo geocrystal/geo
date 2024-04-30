@@ -16,6 +16,7 @@ dependencies:
     github: geocrystal/geo_bearing
   ring_area:
     github: geocrystal/ring_area
+    version: ">= 0.2.1"
   geojson:
     github: geocrystal/geojson
 
