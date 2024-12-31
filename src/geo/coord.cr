@@ -174,11 +174,11 @@ module Geo
       String.build { |str| to_ewkt str }
     end
 
-    def to_ewkt(io : IO) : Nil
+    def to_ewkt(io : IO, output_type = true, output_parentheses = true) : Nil
       # SRID 4326 is used for latitude and longitude
       # https://epsg.org/crs_4326/WGS-84.html
       io << "SRID=4326;"
-      to_wkt io
+      to_wkt io, output_type: output_type, output_parentheses: output_parentheses
     end
 
     def to_ewkb(bytes : Bytes = Bytes.new(23), byte_format : IO::ByteFormat = IO::ByteFormat::BigEndian) : Bytes
@@ -194,10 +194,11 @@ module Geo
       String.build { |str| to_wkt str }
     end
 
-    def to_wkt(io : IO) : Nil
-      io << "POINT("
+    def to_wkt(io : IO, output_type = true, output_parentheses = true) : Nil
+      io << "POINT" if output_type
+      io << '(' if output_parentheses
       io << lng << ' ' << lat
-      io << ')'
+      io << ')' if output_parentheses
     end
 
     def to_wkb(bytes : Bytes = Bytes.new(21), byte_format : IO::ByteFormat = IO::ByteFormat::BigEndian) : Bytes

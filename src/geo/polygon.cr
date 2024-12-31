@@ -106,6 +106,21 @@ module Geo
       GeoJSON::Polygon.new([coordinates])
     end
 
+    def to_wkt : String
+      String.build { |str| to_wkt str }
+    end
+
+    def to_wkt(io : IO) : Nil
+      io << "POLYGON(("
+      @coords.each_with_index 1 do |coord, index|
+        coord.to_wkt io, output_type: false, output_parentheses: false
+        if index < @coords.size
+          io << ", "
+        end
+      end
+      io << "))"
+    end
+
     private def calculate_centroid : Geo::Coord
       centroid_lat = 0.0
       centroid_lng = 0.0
