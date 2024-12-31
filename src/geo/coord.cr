@@ -181,17 +181,11 @@ module Geo
       to_wkt io
     end
 
-    def to_ewkb : Bytes
-      endian = IO::ByteFormat::BigEndian
-
-      bytes = Bytes.new(23)
-      bytes[0] = 0                  # Big Endian
-      endian.encode 1u32, bytes + 1 # POINT type
-      endian.encode lng, bytes + 5
-      endian.encode lat, bytes + 13
+    def to_ewkb(bytes : Bytes = Bytes.new(23), byte_format : IO::ByteFormat = IO::ByteFormat::BigEndian) : Bytes
+      to_wkb bytes, byte_format
       # SRID 4326 is used for latitude and longitude
       # https://epsg.org/crs_4326/WGS-84.html
-      endian.encode 4236i16, bytes + 21
+      byte_format.encode 4236i16, bytes + 21
 
       bytes
     end
@@ -204,6 +198,15 @@ module Geo
       io << "POINT("
       io << lng << ' ' << lat
       io << ')'
+    end
+
+    def to_wkb(bytes : Bytes = Bytes.new(21), byte_format : IO::ByteFormat = IO::ByteFormat::BigEndian) : Bytes
+      bytes[0] = 0                  # Big Endian
+      byte_format.encode 1u32, bytes + 1 # POINT type
+      byte_format.encode lng, bytes + 5
+      byte_format.encode lat, bytes + 13
+
+      bytes
     end
 
     def ll

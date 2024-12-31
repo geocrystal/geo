@@ -121,6 +121,21 @@ describe Geo::Coord do
     end
   end
 
+  describe "#to_wkb" do
+    it "generates a Well Known Binary format" do
+      coord = Geo::Coord.new(12, 34)
+
+      ewkb = coord.to_wkb
+
+      ewkb.should eq Bytes[
+        0,                       # Big-Endian
+        0, 0, 0, 1,              # POINT
+        0, 0, 0, 34, 0, 0, 0, 0, # Longitude encoded as IEEE-754
+        0, 0, 0, 12, 0, 0, 0, 0, # Latitude encoded as IEEE-754
+      ]
+    end
+  end
+
   describe "#to_ewkt" do
     it "generates an Extended Well Known Text format" do
       coord = Geo::Coord.new(50.004444, 36.231389)
