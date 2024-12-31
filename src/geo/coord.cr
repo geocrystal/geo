@@ -170,6 +170,33 @@ module Geo
       io << strfcoord(%{%latd°%latm'%lats"%lath %lngd°%lngm'%lngs"%lngh})
     end
 
+    def to_ewkt : String
+      String.build { |str| to_ewkt str }
+    end
+
+    def to_ewkt(io : IO) : Nil
+      # SRID 4326 is used for latitude and longitude
+      # https://epsg.org/crs_4326/WGS-84.html
+      io << "SRID=4326;POINT("
+      io << lng << ' ' << lat
+      io << ')'
+    end
+
+    def to_ewkb : Bytes
+      endian = IO::ByteFormat::BigEndian
+
+      bytes = Bytes.new(23)
+      bytes[0] = 0                  # Big Endian
+      endian.encode 1u32, bytes + 1 # POINT type
+      endian.encode lng, bytes + 5
+      endian.encode lat, bytes + 13
+      # SRID 4326 is used for latitude and longitude
+      # https://epsg.org/crs_4326/WGS-84.html
+      endian.encode 4236i16, bytes + 21
+
+      bytes
+    end
+
     def ll
       {lat, lng}
     end
