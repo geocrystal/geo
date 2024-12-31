@@ -177,9 +177,8 @@ module Geo
     def to_ewkt(io : IO) : Nil
       # SRID 4326 is used for latitude and longitude
       # https://epsg.org/crs_4326/WGS-84.html
-      io << "SRID=4326;POINT("
-      io << lng << ' ' << lat
-      io << ')'
+      io << "SRID=4326;"
+      to_wkt io
     end
 
     def to_ewkb : Bytes
@@ -195,6 +194,16 @@ module Geo
       endian.encode 4236i16, bytes + 21
 
       bytes
+    end
+
+    def to_wkt : String
+      String.build { |str| to_wkt str }
+    end
+
+    def to_wkt(io : IO) : Nil
+      io << "POINT("
+      io << lng << ' ' << lat
+      io << ')'
     end
 
     def ll

@@ -111,6 +111,16 @@ describe Geo::Coord do
     geojson.should be_a(GeoJSON::Coordinates)
   end
 
+  describe "#to_wkt" do
+    it "generates a Well Known Text format" do
+      coord = Geo::Coord.new(50.004444, 36.231389)
+
+      ewkt = coord.to_wkt
+
+      ewkt.should eq "POINT(36.231389 50.004444)"
+    end
+  end
+
   describe "#to_ewkt" do
     it "generates an Extended Well Known Text format" do
       coord = Geo::Coord.new(50.004444, 36.231389)
