@@ -170,6 +170,46 @@ module Geo
       io << strfcoord(%{%latd°%latm'%lats"%lath %lngd°%lngm'%lngs"%lngh})
     end
 
+    def to_ewkt : String
+      String.build { |str| to_ewkt str }
+    end
+
+    def to_ewkt(io : IO, output_type = true, output_parentheses = true) : Nil
+      # SRID 4326 is used for latitude and longitude
+      # https://epsg.org/crs_4326/WGS-84.html
+      io << "SRID=4326;"
+      to_wkt io, output_type: output_type, output_parentheses: output_parentheses
+    end
+
+    def to_ewkb(bytes : Bytes = Bytes.new(23), byte_format : IO::ByteFormat = IO::ByteFormat::BigEndian) : Bytes
+      to_wkb bytes, byte_format
+      # SRID 4326 is used for latitude and longitude
+      # https://epsg.org/crs_4326/WGS-84.html
+      byte_format.encode 4236i16, bytes + 21
+
+      bytes
+    end
+
+    def to_wkt : String
+      String.build { |str| to_wkt str }
+    end
+
+    def to_wkt(io : IO, output_type = true, output_parentheses = true) : Nil
+      io << "POINT" if output_type
+      io << '(' if output_parentheses
+      io << lng << ' ' << lat
+      io << ')' if output_parentheses
+    end
+
+    def to_wkb(bytes : Bytes = Bytes.new(21), byte_format : IO::ByteFormat = IO::ByteFormat::BigEndian) : Bytes
+      bytes[0] = 0                  # Big Endian
+      byte_format.encode 1u32, bytes + 1 # POINT type
+      byte_format.encode lng, bytes + 5
+      byte_format.encode lat, bytes + 13
+
+      bytes
+    end
+
     def ll
       {lat, lng}
     end

@@ -119,6 +119,19 @@ describe Geo::Polygon do
     geojson.should be_a(GeoJSON::Polygon)
   end
 
+  describe "#to_wkt" do
+    it "outputs a Well Known Text format" do
+      polygon = Geo::Polygon.new([
+        Geo::Coord.new(10, 30),
+        Geo::Coord.new(20, 10),
+        Geo::Coord.new(40, 20),
+        Geo::Coord.new(40, 40),
+      ])
+
+      polygon.to_wkt.should eq "POLYGON((30 10, 10 20, 20 40, 40 40, 30 10))"
+    end
+  end
+
   describe "comparisons" do
     describe "equality" do
       polygon1 = Geo::Polygon.new([pos1, pos2])
