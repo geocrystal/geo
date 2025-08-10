@@ -202,7 +202,7 @@ module Geo
     end
 
     def to_wkb(bytes : Bytes = Bytes.new(21), byte_format : IO::ByteFormat = IO::ByteFormat::BigEndian) : Bytes
-      bytes[0] = 0                  # Big Endian
+      bytes[0] = 0                       # Big Endian
       byte_format.encode 1u32, bytes + 1 # POINT type
       byte_format.encode lng, bytes + 5
       byte_format.encode lat, bytes + 13
