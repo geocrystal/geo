@@ -19,6 +19,8 @@ dependencies:
     version: ">= 0.2.1"
   geojson:
     github: geocrystal/geojson
+  polygon_contains:
+    github: geocrystal/polygon_contains
 
 development_dependencies:
   ameba:
