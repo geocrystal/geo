@@ -1,0 +1,28 @@
+
+Naming/BlockParameterName:
+  Description: Disallows non-descriptive block parameter names
+  MinNameLength: 3
+  AllowNamesEndingInNumbers: true
+  AllowedNames:
+  - e
+  - i
+  - j
+  - k
+  - v
+  - x
+  - y
+  - ex
+  - io
+  - ws
+  - op
+  - tx
+  - id
+  - ip
+  - k1
+  - k2
+  - v1
+  - v2
+  - c
+  ForbiddenNames: []
+  Enabled: true
+  Severity: Convention

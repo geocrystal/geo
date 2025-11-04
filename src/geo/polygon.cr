@@ -61,23 +61,9 @@ module Geo
     end
 
     def contains?(coord : Geo::Coord) : Bool
-      last_coord = @coords.last
-      odd_nodes = false
-      y, x = coord.ll
+      polygon = @coords.map { |c| {c.lng.to_f, c.lat.to_f} }
 
-      @coords.each do |iter_coord|
-        yi, xi = iter_coord.ll
-        yj, xj = last_coord.ll
-
-        if yi < y && yj >= y ||
-           yj < y && yi >= y
-          odd_nodes = !odd_nodes if xi + (y - yi) / (yj - yi) * (xj - xi) < x
-        end
-
-        last_coord = iter_coord
-      end
-
-      odd_nodes
+      PolygonContains.contains?([polygon], {coord.lng.to_f, coord.lat.to_f})
     end
 
     def centroid : Geo::Coord
