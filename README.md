@@ -183,6 +183,31 @@ point.destination(5000, 90, :kilometers)
 # Geo::Coord(@lat=26.440010707631124, @lng=-22.885355549364313)
 ```
 
+### Calculate sunrise and sunset times
+
+Sun times are calculated using the [sun_times](https://github.com/geocrystal/sun_times) shard.
+
+```crystal
+require "geo"
+
+coord = Geo::Coord.new(51.5, -0.13)
+location = Time::Location.load("Europe/London")
+date = Time.local(2025, 11, 5, location: location)
+
+coord.sunrise(date, location)
+# => 2025-11-05 07:01:43 +00:00
+
+coord.sunset(date, location)
+# => 2025-11-05 16:26:22 +00:00
+
+coord.sun_events(date, location)
+# => {astronomical_dawn: ..., nautical_dawn: ..., civil_dawn: ..., sunrise: ..., solar_noon: ..., sunset: ..., civil_dusk: ..., nautical_dusk: ..., astronomical_dusk: ...}
+```
+
+In polar regions, `sunrise`, `sunset`, and twilight methods raise
+`SunTimes::CalculationError` when the event does not occur. Use the `?` variants
+like `sunrise?` and `sunset?` to return `nil` instead.
+
 
 ## Contributing
 

@@ -17,6 +17,8 @@ dependencies:
   ring_area:
     github: geocrystal/ring_area
     version: ">= 0.2.1"
+  sun_times:
+    github: geocrystal/sun_times
   geojson:
     github: geocrystal/geojson
   polygon_contains:
