@@ -208,7 +208,6 @@ In polar regions, `sunrise`, `sunset`, and twilight methods raise
 `SunTimes::CalculationError` when the event does not occur. Use the `?` variants
 like `sunrise?` and `sunset?` to return `nil` instead.
 
-
 ## Contributing
 
 1. Fork it (<https://github.com/geocrystal/geo/fork>)
