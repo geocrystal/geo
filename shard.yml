@@ -24,10 +24,6 @@ dependencies:
   polygon_contains:
     github: geocrystal/polygon_contains
 
-development_dependencies:
-  ameba:
-    github: crystal-ameba/ameba
-
 authors:
   - Anton Maminov <anton.maminov@gmail.com>
 
