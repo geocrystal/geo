@@ -69,8 +69,8 @@ describe Geo::Coord do
       pos = Geo::Coord.new(50.004444, 36.231389)
 
       it do
-        pos.strfcoord(%{%latd %latm' %lats" %lath, %lngd %lngm' %lngs" %lngh})
-          .should eq(%{50 0' 16" N, 36 13' 53" E})
+        pos.strfcoord(%(%latd %latm' %lats" %lath, %lngd %lngm' %lngs" %lngh))
+          .should eq(%(50 0' 16" N, 36 13' 53" E))
       end
     end
 
@@ -97,9 +97,9 @@ describe Geo::Coord do
       pos = Geo::Coord.new(50.004444, 36.231389)
       neg = Geo::Coord.new(-50.004444, -36.231389)
 
-      it { pos.to_s.should eq(%{50°0'16"N 36°13'53"E}) }
-      it { neg.to_s.should eq(%{50°0'16"S 36°13'53"W}) }
-      it { "#{pos}".should eq(%{50°0'16"N 36°13'53"E}) }
+      it { pos.to_s.should eq(%(50°0'16"N 36°13'53"E)) }
+      it { neg.to_s.should eq(%(50°0'16"S 36°13'53"W)) }
+      it { "#{pos}".should eq(%(50°0'16"N 36°13'53"E)) }
     end
   end
 
