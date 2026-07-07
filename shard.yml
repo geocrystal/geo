@@ -17,14 +17,12 @@ dependencies:
   ring_area:
     github: geocrystal/ring_area
     version: ">= 0.2.1"
+  sun_times:
+    github: geocrystal/sun_times
   geojson:
     github: geocrystal/geojson
   polygon_contains:
     github: geocrystal/polygon_contains
-
-development_dependencies:
-  ameba:
-    github: crystal-ameba/ameba
 
 authors:
   - Anton Maminov <anton.maminov@gmail.com>

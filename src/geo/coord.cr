@@ -167,7 +167,7 @@ module Geo
     # g.to_s(dms: false) # => "50.004444,36.231389"
     # ```
     def to_s(io)
-      io << strfcoord(%{%latd°%latm'%lats"%lath %lngd°%lngm'%lngs"%lngh})
+      io << strfcoord(%(%latd°%latm'%lats"%lath %lngd°%lngm'%lngs"%lngh))
     end
 
     def to_ewkt : String
